@@ -432,11 +432,14 @@ test('AppFunctional is a functional component', () => {
       })
       test(`[F7 ${label}] Actions: left, type valid email, submit
           Submitting resets the email input`, async () => {
+            render(<AppFunctional />)
         fireEvent.click(left)
-        fireEvent.change(email, { target: { value: 'lady@gaga.com' } })
-        fireEvent.click(submit)
+        const emailInput =screen.getByPlaceholderText('type email')
+        fireEvent.change(emailInput, { target: { value: 'lady@gaga.com' } })
+        const submitButton = screen.getByText('submit')
+        fireEvent.click(submitButton)
         await screen.findByText('lady win #29', queryOptions, waitForOptions)
-        expect(email.value).toBeFalsy()
+        expect(emailInput.value).toBeFalsy()
       })
       test(`[F8 ${label}] Actions: up, right, type valid email, submit
           Submitting does not reset coordinates nor steps`, async () => {

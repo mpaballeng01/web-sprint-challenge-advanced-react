@@ -75,7 +75,9 @@ export default function AppFunctional(props) {
       body: JSON.stringify(payload),
     })
       .then((response) => response.json())
-      .then((data) => setMessage(data.message))
+      .then((data) =>{ 
+        setMessage(data.message) 
+        setEmail("")}) 
       .catch((err) => setMessage('An error occurred. Please try again.'));
   }
 
